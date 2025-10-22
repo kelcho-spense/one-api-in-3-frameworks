@@ -15,4 +15,7 @@ export class User {
     @Column("int")
     age: number
 
+    @Column("varchar", { length: 100, unique: true })
+    email: string
+
 }
