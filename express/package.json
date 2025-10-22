@@ -7,7 +7,7 @@
     "dev": "tsx watch src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
-    "typeorm": "typeorm-ts-node-commonjs",
+    "typeorm": "typeorm-ts-node-commonjs", 
     "db-sync": "typeorm-ts-node-commonjs schema:sync -d src/data-source.ts",
     "drop": "typeorm-ts-node-commonjs schema:drop -d src/data-source.ts",
     "m-create" : "typeorm-ts-node-commonjs migration:create ./src/migration/migration",

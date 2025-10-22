@@ -7,7 +7,7 @@ const AppDataSource = new DataSource({
     port: 1433,
     username: "sa",
     password: "5472",
-    database: "express_db",
+    database: "express_db", 
     synchronize: true,
     logging: true,
     entities: [User],
@@ -15,8 +15,8 @@ const AppDataSource = new DataSource({
         encrypt: false, // Add this for local development
         trustServerCertificate: true // Add this for local development
     },
-    migrations: ["src/migration/*.ts"],
-    
+    migrations: ["src/migration/*.ts"], // Path to your migration files
+
 })
 
 export default AppDataSource
