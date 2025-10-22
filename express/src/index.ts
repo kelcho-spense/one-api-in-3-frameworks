@@ -17,7 +17,7 @@ app.get('/api', (req, res) => {
 
 // middleware 
 
-app.use(express.json())// parse JSON bodies
+app.use(express.json()) // parse JSON bodies
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 
   console.error(err.stack); // Log the error for debugging
@@ -29,7 +29,6 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   });
 });
 
-
 // routes
 app.use('/api', userRouter)
 app.use('/api', profileRouter)
@@ -37,9 +36,6 @@ app.use('/api', authorRouter)
 app.use('/api', blogRouter)
 app.use('/api', commentRouter)
 app.use('/api', categoryRouter)
-
-
-
 
 app.listen(port, () => {
   // Initialize database connection
