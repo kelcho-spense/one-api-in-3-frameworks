@@ -38,3 +38,60 @@ export const updateProfileSchema = z.object({
   avatarUrl: z.url('Invalid URL format').optional(),
 });
 
+// Author validation schemas
+export const createAuthorSchema = z.object({
+  userId: z.string().regex(sqlServerUuidRegex, 'Invalid user ID format'),
+  biography: z.string().optional(),
+});
+
+export const updateAuthorSchema = z.object({
+  biography: z.string().optional(),
+});
+
+// Blog validation schemas
+export const createBlogSchema = z.object({
+  title: z.string().min(1, 'Title is required').max(200, 'Title cannot exceed 200 characters'),
+  content: z.string().min(1, 'Content is required'),
+  slug: z.string().max(150, 'Slug cannot exceed 150 characters').optional(),
+  published: z.boolean().optional(),
+  excerpt: z.string().optional(),
+  authorId: z.string().regex(sqlServerUuidRegex, 'Invalid author ID format'),
+  categoryIds: z.array(z.string().regex(sqlServerUuidRegex, 'Invalid category ID format')).optional(),
+});
+
+export const updateBlogSchema = z.object({
+  title: z.string().min(1, 'Title is required').max(200, 'Title cannot exceed 200 characters').optional(),
+  content: z.string().min(1, 'Content is required').optional(),
+  slug: z.string().max(150, 'Slug cannot exceed 150 characters').optional(),
+  published: z.boolean().optional(),
+  excerpt: z.string().optional(),
+  authorId: z.string().regex(sqlServerUuidRegex, 'Invalid author ID format').optional(),
+  categoryIds: z.array(z.string().regex(sqlServerUuidRegex, 'Invalid category ID format')).optional(),
+});
+
+// Comment validation schemas
+export const createCommentSchema = z.object({
+  content: z.string().min(1, 'Content is required'),
+  userId: z.string().regex(sqlServerUuidRegex, 'Invalid user ID format'),
+  blogId: z.string().regex(sqlServerUuidRegex, 'Invalid blog ID format'),
+  isApproved: z.boolean().optional(),
+});
+
+export const updateCommentSchema = z.object({
+  content: z.string().min(1, 'Content is required').optional(),
+  isApproved: z.boolean().optional(),
+});
+
+// Category validation schemas
+export const createCategorySchema = z.object({
+  name: z.string().min(1, 'Name is required').max(100, 'Name cannot exceed 100 characters'),
+  slug: z.string().min(1, 'Slug is required').max(150, 'Slug cannot exceed 150 characters'),
+  description: z.string().optional(),
+});
+
+export const updateCategorySchema = z.object({
+  name: z.string().min(1, 'Name is required').max(100, 'Name cannot exceed 100 characters').optional(),
+  slug: z.string().min(1, 'Slug is required').max(150, 'Slug cannot exceed 150 characters').optional(),
+  description: z.string().optional(),
+});
+

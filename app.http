@@ -68,3 +68,137 @@ content-type: application/json
 ### DELETE A PROFILE
 DELETE {{localhost}}/profiles/PROFILE-UUID-HERE
 
+##################################################
+### AUTHOR ENDPOINTS
+##################################################
+
+### FETCH ALL AUTHORS
+GET {{localhost}}/authors
+
+### FETCH AN AUTHOR BY ID
+GET {{localhost}}/authors/AUTHOR-UUID-HERE
+
+### CREATE A NEW AUTHOR FOR A USER
+POST {{localhost}}/authors
+content-type: application/json
+
+{
+    "userId": "B297391E-98AF-F011-A791-4C496CCEA2E2",
+    "biography": "Award-winning author with 10+ years of experience in technical writing"
+}
+
+### UPDATE AN AUTHOR
+PUT {{localhost}}/authors/AUTHOR-UUID-HERE
+content-type: application/json
+
+{
+    "biography": "Updated biography with new achievements and publications"
+}
+
+### DELETE AN AUTHOR
+DELETE {{localhost}}/authors/AUTHOR-UUID-HERE
+
+##################################################
+### CATEGORY ENDPOINTS
+##################################################
+
+### FETCH ALL CATEGORIES
+GET {{localhost}}/categories
+
+### FETCH A CATEGORY BY ID
+GET {{localhost}}/categories/CATEGORY-UUID-HERE
+
+### CREATE A NEW CATEGORY
+POST {{localhost}}/categories
+content-type: application/json
+
+{
+    "name": "Technology",
+    "slug": "technology",
+    "description": "Articles about the latest in technology and software development"
+}
+
+### UPDATE A CATEGORY
+PUT {{localhost}}/categories/CATEGORY-UUID-HERE
+content-type: application/json
+
+{
+    "name": "Tech & Innovation",
+    "slug": "tech-innovation",
+    "description": "Updated description for technology category"
+}
+
+### DELETE A CATEGORY
+DELETE {{localhost}}/categories/CATEGORY-UUID-HERE
+
+##################################################
+### BLOG ENDPOINTS
+##################################################
+
+### FETCH ALL BLOGS
+GET {{localhost}}/blogs
+
+### FETCH A BLOG BY ID
+GET {{localhost}}/blogs/BLOG-UUID-HERE
+
+### CREATE A NEW BLOG
+POST {{localhost}}/blogs
+content-type: application/json
+
+{
+    "title": "Getting Started with TypeScript",
+    "slug": "getting-started-with-typescript",
+    "content": "TypeScript is a strongly typed programming language that builds on JavaScript...",
+    "excerpt": "Learn the basics of TypeScript in this comprehensive guide",
+    "published": true,
+    "authorId": "AUTHOR-UUID-HERE",
+    "categoryIds": ["CATEGORY-UUID-1", "CATEGORY-UUID-2"]
+}
+
+### UPDATE A BLOG
+PUT {{localhost}}/blogs/BLOG-UUID-HERE
+content-type: application/json
+
+{
+    "title": "Advanced TypeScript Techniques",
+    "content": "Updated content with advanced TypeScript patterns...",
+    "published": true,
+    "categoryIds": ["CATEGORY-UUID-1"]
+}
+
+### DELETE A BLOG
+DELETE {{localhost}}/blogs/BLOG-UUID-HERE
+
+##################################################
+### COMMENT ENDPOINTS
+##################################################
+
+### FETCH ALL COMMENTS
+GET {{localhost}}/comments
+
+### FETCH A COMMENT BY ID
+GET {{localhost}}/comments/COMMENT-UUID-HERE
+
+### CREATE A NEW COMMENT
+POST {{localhost}}/comments
+content-type: application/json
+
+{
+    "content": "Great article! This really helped me understand TypeScript better.",
+    "userId": "B297391E-98AF-F011-A791-4C496CCEA2E2",
+    "blogId": "BLOG-UUID-HERE",
+    "isApproved": false
+}
+
+### UPDATE A COMMENT
+PUT {{localhost}}/comments/COMMENT-UUID-HERE
+content-type: application/json
+
+{
+    "content": "Updated comment with additional thoughts",
+    "isApproved": true
+}
+
+### DELETE A COMMENT
+DELETE {{localhost}}/comments/COMMENT-UUID-HERE
+

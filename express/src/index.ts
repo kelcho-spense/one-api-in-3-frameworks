@@ -3,6 +3,10 @@ import express, { NextFunction, Request, Response } from 'express'
 import AppDataSource from './data-source'
 import userRouter from './User/user.router'
 import profileRouter from './Profile/profile.router'
+import authorRouter from './Author/author.router'
+import blogRouter from './Blogs/blogs.router'
+import commentRouter from './Comments/comments.router'
+import categoryRouter from './Categories/categories.router'
 
 const app = express()
 const port = 8000
@@ -29,6 +33,10 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 // routes
 app.use('/api', userRouter)
 app.use('/api', profileRouter)
+app.use('/api', authorRouter)
+app.use('/api', blogRouter)
+app.use('/api', commentRouter)
+app.use('/api', categoryRouter)
 
 
 
