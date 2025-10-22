@@ -1,59 +1,79 @@
 import { Router, Request, Response } from 'express'
 import UserService from './user.service'
+import { createUserSchema, updateUserSchema, uuidParamSchema } from '../validationSchemas'
+import { validate, validateParams } from '../middlewares'
+
 const userRouter: Router = Router()
 const userService = new UserService()
 
-userRouter.get('/users', (req: Request, res: Response) => {
-    const users = userService.findAll()
-    res.status(200).json(users)
+userRouter.get('/users', async (req: Request, res: Response) => {
+    try {
+        const users = await userService.findAll()
+        res.status(200).json(users)
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to fetch users' });
+    }
 })
 
-userRouter.post('/users', (req: Request, res: Response) => {
-    const userData = req.body
-    const newUser = userService.createUser(userData)
-    res.status(201).json(newUser)
+userRouter.post('/users', validate(createUserSchema), async (req: Request, res: Response) => {
+    try {
+        const userData = req.body
+        const newUser = await userService.createUser(userData)
+        res.status(201).json(newUser)
+    } catch (err: any) {
+        // Handle specific errors (like duplicate email)
+        if (err?.number === 2627 || err?.message?.includes('duplicate')) {
+            return res.status(409).json({ error: 'A user with this email already exists' });
+        }
+        res.status(500).json({ error: 'Failed to create user' });
+    }
 })
 
-userRouter.get('/users/:id', (req: Request, res: Response) => {
-    const userId = req.params.id
-    if (!userId) {
-        res.status(400).send('User ID is required')
-        return
+userRouter.get('/users/:id', validateParams(uuidParamSchema), async (req: Request, res: Response) => {
+    const userId = req.params.id!
+
+    try {
+        const user = await userService.findById(userId)
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' })
+        }
+        return res.status(200).json(user)
+    } catch (err) {
+        return res.status(500).json({ error: 'Failed to fetch user' })
     }
-    const user = userService.findById(userId)
-    res.status(201).json(user)
 })
 
-userRouter.put('/users/:id', (req: Request, res: Response) => {
-    const userId = req.params.id
-    if (!userId) {
-        res.status(400).send('User ID is required')
-        return
+userRouter.put('/users/:id', validateParams(uuidParamSchema), validate(updateUserSchema), async (req: Request, res: Response) => {
+    const userId = req.params.id!
+
+    try {
+        const userData = req.body
+        const updatedUser = await userService.updateUser(userId, userData)
+        if (!updatedUser) {
+            return res.status(404).json({ error: 'User not found' })
+        }
+        return res.status(200).json(updatedUser)
+    } catch (err: any) {
+        if (err?.number === 2627 || err?.message?.includes('duplicate')) {
+            return res.status(409).json({ error: 'A user with this email already exists' });
+        }
+        return res.status(500).json({ error: 'Failed to update user' })
     }
-    const userData = req.body
-    const updatedUser = userService.updateUser(userId, userData)
-    if (!updatedUser) {
-        res.status(404).send('User not found')
-        return
-    }
-    res.status(200).json(updatedUser)
 })
 
-userRouter.delete('/users/:id', (req: Request, res: Response) => {
-    const userId = req.params.id
-    if (!userId) {
-        res.status(400).send('User ID is required')
-        return
-    }
+userRouter.delete('/users/:id', validateParams(uuidParamSchema), async (req: Request, res: Response) => {
+    const userId = req.params.id!
 
-    const deleted = userService.deleteUser(userId)
-    if (!deleted) {
-        res.status(404).send('User not found')
-        return
+    try {
+        const deleted = await userService.deleteUser(userId)
+        if (!deleted) {
+            return res.status(404).json({ error: 'User not found' })
+        }
+        return res.status(204).end()
+    } catch (err) {
+        return res.status(500).json({ error: 'Failed to delete user' })
     }
-    res.status(204).send(`User with id : ${userId} deleted successfully`)
-
 })
 
-export default userRouter
+export default userRouter;
 

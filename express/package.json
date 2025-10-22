@@ -7,10 +7,10 @@
     "dev": "tsx watch src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
-    "typeorm": "typeorm-ts-node-commonjs", 
+    "typeorm": "typeorm-ts-node-commonjs",
     "db-sync": "typeorm-ts-node-commonjs schema:sync -d src/data-source.ts",
     "drop": "typeorm-ts-node-commonjs schema:drop -d src/data-source.ts",
-    "m-create" : "typeorm-ts-node-commonjs migration:create ./src/migration/migration",
+    "m-create": "typeorm-ts-node-commonjs migration:create ./src/migration/migration",
     "m-generate": "typeorm-ts-node-commonjs migration:generate -d src/data-source.ts ./src/migration/migration",
     "m-run": "typeorm-ts-node-commonjs migration:run -d src/data-source.ts",
     "m-revert": "typeorm-ts-node-commonjs migration:revert -d src/data-source.ts"
@@ -22,8 +22,8 @@
   "devDependencies": {
     "@types/express": "^5.0.3",
     "@types/node": "^24.8.1",
-    "typescript": "^5.9.3",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
   },
   "dependencies": {
     "express": "^5.1.0",
@@ -31,6 +31,7 @@
     "node": "^25.0.0",
     "reflect-metadata": "^0.2.2",
     "tsx": "^4.7.1",
-    "typeorm": "^0.3.27"
+    "typeorm": "^0.3.27",
+    "zod": "^4.1.12"
   }
 }

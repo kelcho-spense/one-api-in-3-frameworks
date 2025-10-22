@@ -1,4 +1,3 @@
-import { profile } from "console";
 import { Router, Request, Response } from "express";
 
 const profileRouter: Router = Router();

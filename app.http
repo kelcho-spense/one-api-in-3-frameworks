@@ -4,25 +4,25 @@
 ### HEALTH CHECK
 GET {{localhost}}/
 
-### FETCH A COMMENT
-GET {{localhost}}/users/1
+### fetch all users
+GET {{localhost}}/users
 
-### LIST COMMENTS WITH PAGINATION
-GET {{localhost}}/comments
-    ?page=2
-    &pageSize=10
+### fetch a user
+GET {{localhost}}/users/8B798F98-6BAF-F011-A791-4C496CCEA2E2
 
-### CREATE A COMMENT
-POST {{localhost}}/comments
+
+### create a user
+POST {{localhost}}/users
 content-type: application/json
 
 {
-    "name": "sample",
-    "time": "Wed, 21 Oct 2015 18:27:50 GMT"
+    "firstName": "firstname",
+    "lastName": "lastname",
+    "email": "test@gmail.com"
 }
 
 ### LOGIN
-POST {{localhost}}/comments 
+POST {{localhost}}/users 
 content-type: application/json
 Authorization: Bearer your_token_here
 
@@ -31,22 +31,23 @@ Authorization: Bearer your_token_here
     "time": "Wed, 21 Oct 2015 18:27:50 GMT"
 }
 
-### UPDATE A COMMENT
-PUT {{localhost}}/comments/1
+### UPDATE A USER
+PUT {{localhost}}/users/8B798F98-6BAF-F011-A791-4C496CCEA2E2
 content-type: application/json
-Authorization: Bearer your_token_here
 
 {
-    "name": "updated sample",
-    "time": "Wed, 21 Oct 2015 18:27:50 GMT"
+   "firstName": "firstname-UPDATE"
 }
 
-### DELETE A COMMENT
-DELETE {{localhost}}/comments/1 
-Authorization: Bearer your_token_here
+### DELETE A USER
+DELETE {{localhost}}/users/8B798F98-6BAF-F011-A791-4C496CCEA2E2
 
-### SEARCH COMMENTS
-GET {{localhost}}/comments/search
+### SEARCH USERS
+GET {{localhost}}/users/search
     ?query=sample
     &limit=5
     
+### LIST COMMENTS WITH PAGINATION
+GET {{localhost}}/users
+    ?page=2
+    &pageSize=10

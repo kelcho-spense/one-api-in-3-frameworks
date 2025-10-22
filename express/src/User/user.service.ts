@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import AppDataSource from '../data-source';
 import { Profile } from '../entity/Profile';
 
+// using repository pattern: service to handle user-related DB operations
 class UserService {
 		private userRepository: Repository<User>;
 		private profileRepository: Repository<Profile>;
