@@ -1,8 +1,11 @@
 
-@localhost =  http://localhost:8000
+@localhost =  http://localhost:8000/api
+
+### HEALTH CHECK
+GET {{localhost}}/
 
 ### FETCH A COMMENT
-GET {{localhost}}/comments/1
+GET {{localhost}}/users/1
 
 ### LIST COMMENTS WITH PAGINATION
 GET {{localhost}}/comments

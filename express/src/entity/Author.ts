@@ -7,7 +7,6 @@ import {
     JoinColumn,
     CreateDateColumn,
     UpdateDateColumn,
-    Index,
 } from 'typeorm';
 import { User } from './User';
 import { Blog } from './Blog';
@@ -17,16 +16,17 @@ export class Author {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column({ nullable: true })
+    @Column("varchar", { nullable: true })
     penName?: string;
 
     @Column({ nullable: true, type: 'text' })
     biography?: string;
 
-    @CreateDateColumn()
+     // Use SQL Server compatible datetime type and do NOT specify a length
+    @CreateDateColumn({ type: 'datetime2' })
     createdAt: Date;
 
-    @UpdateDateColumn()
+    @UpdateDateColumn({ type: 'datetime2' })
     updatedAt: Date;
 
     @OneToOne(() => User, (user) => user.author)

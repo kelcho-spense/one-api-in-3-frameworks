@@ -6,6 +6,7 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
     Index,
+    Timestamp,
 } from 'typeorm';
 import { User } from './User';
 import { Blog } from './Blog';
@@ -19,13 +20,14 @@ export class Comment {
     content: string;
 
     @Index('IDX_COMMENT_APPROVED')
-    @Column({ default: false })
+    @Column({ default: false, type: 'bit' })
     isApproved: boolean;
 
-    @CreateDateColumn()
+   // Use SQL Server compatible datetime type and do NOT specify a length
+    @CreateDateColumn({ type: 'datetime2' })
     createdAt: Date;
 
-    @UpdateDateColumn()
+    @UpdateDateColumn({ type: 'datetime2' })
     updatedAt: Date;
 
     @ManyToOne(() => User, (user) => user.comments)

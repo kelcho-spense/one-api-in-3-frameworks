@@ -341,5 +341,31 @@ class UserService {
 }
 
 export default UserService;
+
 ```
 
+## Running migrations
+- create an empty migration file (edit it manually)
+```bash
+pnpm run m-create
+```
+- auto-generate a migration (create from entity vs DB diff)
+```bash
+pnpm run m-generate
+```
+- run pending migrations
+```bash
+pnpm run m-run
+```
+- revert last executed migration
+```bash
+pnpm run m-revert
+```
+- synchronize database schema with entities (use with caution in production)
+```bash
+pnpm run db-sync
+```
+- drop the database schema
+```bash
+pnpm run db-drop
+```
