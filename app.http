@@ -4,50 +4,67 @@
 ### HEALTH CHECK
 GET {{localhost}}/
 
-### fetch all users
+##################################################
+### USER ENDPOINTS
+##################################################
+
+### FETCH ALL USERS
 GET {{localhost}}/users
 
-### fetch a user
-GET {{localhost}}/users/8B798F98-6BAF-F011-A791-4C496CCEA2E2
+### FETCH A USER
+GET {{localhost}}/users/B297391E-98AF-F011-A791-4C496CCEA2E2
 
-
-### create a user
+### CREATE A USER
 POST {{localhost}}/users
 content-type: application/json
 
 {
-    "firstName": "firstname",
-    "lastName": "lastname",
-    "email": "test@gmail.com"
-}
-
-### LOGIN
-POST {{localhost}}/users 
-content-type: application/json
-Authorization: Bearer your_token_here
-
-{
-    "name": "sample",
-    "time": "Wed, 21 Oct 2015 18:27:50 GMT"
+    "email": "test@gmail.com",
+    "password": "password123"
 }
 
 ### UPDATE A USER
-PUT {{localhost}}/users/8B798F98-6BAF-F011-A791-4C496CCEA2E2
+PUT {{localhost}}/users/B297391E-98AF-F011-A791-4C496CCEA2E2
 content-type: application/json
 
 {
-   "firstName": "firstname-UPDATE"
+   "email": "updated@gmail.com",
+   "password": "newpassword123"
 }
 
 ### DELETE A USER
 DELETE {{localhost}}/users/8B798F98-6BAF-F011-A791-4C496CCEA2E2
 
-### SEARCH USERS
-GET {{localhost}}/users/search
-    ?query=sample
-    &limit=5
-    
-### LIST COMMENTS WITH PAGINATION
-GET {{localhost}}/users
-    ?page=2
-    &pageSize=10
+##################################################
+### PROFILE ENDPOINTS
+##################################################
+
+### FETCH ALL PROFILES
+GET {{localhost}}/profiles
+
+### FETCH A PROFILE BY ID
+GET {{localhost}}/profiles/74A34353-98AF-F011-A791-4C496CCEA2E2
+
+### CREATE A NEW PROFILE FOR A USER
+POST {{localhost}}/profiles
+content-type: application/json
+
+{
+    "userId": "B297391E-98AF-F011-A791-4C496CCEA2E2",
+    "fullName": "John Doe",
+    "bio": "Software developer passionate about TypeScript and Node.js",
+    "avatarUrl": "https://example.com/avatar.jpg"
+}
+
+### UPDATE A PROFILE
+PUT {{localhost}}/profiles/PROFILE-UUID-HERE
+content-type: application/json
+
+{
+    "fullName": "John Updated Doe",
+    "bio": "Senior software developer with 5 years of experience"
+}
+
+### DELETE A PROFILE
+DELETE {{localhost}}/profiles/PROFILE-UUID-HERE
+

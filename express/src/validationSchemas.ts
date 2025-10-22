@@ -1,9 +1,8 @@
-import * as z from "zod"; 
+import * as z from "zod";
 
 export const createUserSchema = z.object({
-  firstName: z.string().min(1, 'First name is required'),
-  lastName: z.string().min(1, 'Last name is required').max(20, 'Last name max length is 20'),
-  email: z.email('Invalid email address'),
+  email: z.string().email('Invalid email address'),
+  password: z.string().min(6, 'Password must be at least 6 characters'),
 });
 
 // SQL Server UUID regex pattern : 8-4-4-4-5 hexadecimal characters
@@ -12,9 +11,30 @@ const sqlServerUuidRegex = /^[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4,5}-[0-9A-F]{4}-[
 
 export const uuidParamSchema = z.object({
   id: z.string()
-       .regex(sqlServerUuidRegex, 'Invalid ID format')
+    .regex(sqlServerUuidRegex, 'Invalid UUID format')
 });
-export const updateUserSchema = createUserSchema.partial();
 
-// export type CreateUserInput = z.infer<typeof createUserSchema>;
-// export type UpdateUserInput = z.infer<typeof updateUserSchema>;
+export const userIdParamSchema = z.object({
+  userId: z.string()
+    .regex(sqlServerUuidRegex, 'Invalid UUID format')
+});
+
+export const updateUserSchema = z.object({
+  email: z.string().email('Invalid email address').optional(),
+  password: z.string().min(6, 'Password must be at least 6 characters').optional(),
+});
+
+// Profile validation schemas
+export const createProfileSchema = z.object({
+  userId: z.string().regex(sqlServerUuidRegex, 'Invalid user ID format'),
+  fullName: z.string().max(100, 'Full name cannot exceed 100 characters').optional(),
+  bio: z.string().max(1000, 'Bio cannot exceed 1000 characters').optional(),
+  avatarUrl: z.url('Invalid URL format').optional(),
+});
+
+export const updateProfileSchema = z.object({
+  fullName: z.string().max(100, 'Full name cannot exceed 100 characters').optional(),
+  bio: z.string().max(1000, 'Bio cannot exceed 1000 characters').optional(),
+  avatarUrl: z.url('Invalid URL format').optional(),
+});
+

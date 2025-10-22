@@ -269,29 +269,6 @@ export class Category {
 - Add indexes on commonly queried columns (e.g., `slug`, `authorId`, `published`).
 - Define DTOs and validation (class-validator) for input shapes.
 
-## Implemented entities (in this repo)
-
-Summary of implemented files and indexes:
-
-- `express/src/entity/Blog.ts`
-	- Indexes: `slug` (unique), `published` (index), composite index `(published, createdAt)`, and an index on the `author` relation (FK).
-- `express/src/entity/Author.ts`
-	- One-to-one to `User`, one-to-many to `Blog`.
-- `express/src/entity/Comment.ts`
-	- Index on `isApproved`; relations to `User` and `Blog`.
-- `express/src/entity/Category.ts`
-	- Indexes: `name` (unique) and `slug` (unique).
-- `express/src/entity/Profile.ts`
-	- One-to-one with `User`.
-- `express/src/User/user.entity.ts` (updated)
-	- Switched to `uuid` primary key, added unique index on `email`, and relations to `Profile`, `Author`, and `Comment`.
-
-Notes:
-
-- Relation-level `@Index()` was used where appropriate; TypeORM will create indexes on generated FK columns.
-- Unique constraints applied via `@Index(..., { unique: true })` or `@Column({ unique: true })`.
-- For advanced/partial indexes create a migration with raw SQL (Postgres). I can create migrations for you if you want.
-
 ## Example service snippet (UserService)
 
 This is a small example demonstrating how to load a user with related entities using TypeORM repository API.

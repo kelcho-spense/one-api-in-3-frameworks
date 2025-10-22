@@ -16,9 +16,6 @@ export class Author {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column("varchar", { nullable: true })
-    penName?: string;
-
     @Column({ nullable: true, type: 'text' })
     biography?: string;
 

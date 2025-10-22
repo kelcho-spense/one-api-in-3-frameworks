@@ -2,6 +2,7 @@ import "reflect-metadata"
 import express, { NextFunction, Request, Response } from 'express'
 import AppDataSource from './data-source'
 import userRouter from './User/user.router'
+import profileRouter from './Profile/profile.router'
 
 const app = express()
 const port = 8000
@@ -13,8 +14,8 @@ app.get('/api', (req, res) => {
 // middleware 
 
 app.use(express.json())// parse JSON bodies
-app.use((err: Error, req:Request, res:Response , next: NextFunction) => {
-  
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+
   console.error(err.stack); // Log the error for debugging
 
   // Send a structured error response to the client
@@ -27,6 +28,7 @@ app.use((err: Error, req:Request, res:Response , next: NextFunction) => {
 
 // routes
 app.use('/api', userRouter)
+app.use('/api', profileRouter)
 
 
 

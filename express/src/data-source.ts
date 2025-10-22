@@ -12,12 +12,19 @@ const AppDataSource = new DataSource({
     port: 1433,
     username: "sa",
     password: "5472",
-    database: "express_db", 
+    database: "express_db",
     synchronize: true,
     logging: true,
-     options: {
+    requestTimeout: 60000, // Increase timeout to 60 seconds
+    options: {
         encrypt: false, // Add this for local development
-        trustServerCertificate: true // Add this for local development
+        trustServerCertificate: true, // Add this for local development
+        enableArithAbort: true,
+    },
+    pool: {
+        max: 10,
+        min: 0,
+        idleTimeoutMillis: 30000
     },
     entities: [User, Profile, Author, Blog, Comment, Category],
     migrations: ["src/migration/*.ts"], // Path to your migration files
