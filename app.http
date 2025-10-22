@@ -1,0 +1,49 @@
+
+@localhost =  http://localhost:8000
+
+### FETCH A COMMENT
+GET {{localhost}}/comments/1
+
+### LIST COMMENTS WITH PAGINATION
+GET {{localhost}}/comments
+    ?page=2
+    &pageSize=10
+
+### CREATE A COMMENT
+POST {{localhost}}/comments
+content-type: application/json
+
+{
+    "name": "sample",
+    "time": "Wed, 21 Oct 2015 18:27:50 GMT"
+}
+
+### LOGIN
+POST {{localhost}}/comments 
+content-type: application/json
+Authorization: Bearer your_token_here
+
+{
+    "name": "sample",
+    "time": "Wed, 21 Oct 2015 18:27:50 GMT"
+}
+
+### UPDATE A COMMENT
+PUT {{localhost}}/comments/1
+content-type: application/json
+Authorization: Bearer your_token_here
+
+{
+    "name": "updated sample",
+    "time": "Wed, 21 Oct 2015 18:27:50 GMT"
+}
+
+### DELETE A COMMENT
+DELETE {{localhost}}/comments/1 
+Authorization: Bearer your_token_here
+
+### SEARCH COMMENTS
+GET {{localhost}}/comments/search
+    ?query=sample
+    &limit=5
+    

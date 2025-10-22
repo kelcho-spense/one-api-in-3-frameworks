@@ -1,0 +1,33 @@
+{
+  "name": "express",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "typeorm": "typeorm-ts-node-commonjs",
+    "migrate": "typeorm-ts-node-commonjs schema:sync -d src/data-source.ts",
+    "drop": "typeorm-ts-node-commonjs schema:drop -d src/data-source.ts",
+    "revert": "typeorm-ts-node-commonjs migration:revert -d src/data-source.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.18.3",
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.8.1",
+    "typescript": "^5.9.3",
+    "ts-node": "^10.9.2"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "mssql": "^12.0.0",
+    "node": "^25.0.0",
+    "reflect-metadata": "^0.2.2",
+    "tsx": "^4.7.1",
+    "typeorm": "^0.3.27"
+  }
+}
