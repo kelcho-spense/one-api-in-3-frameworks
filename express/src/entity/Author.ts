@@ -16,8 +16,11 @@ export class Author {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column({ nullable: true, type: 'text' })
-    biography?: string;
+    @Column({ type: 'text' })
+    biography: string;
+
+    @Column({ nullable: true, type: 'uuid'})
+    userId: string;
 
      // Use SQL Server compatible datetime type and do NOT specify a length
     @CreateDateColumn({ type: 'datetime2' })

@@ -76,7 +76,7 @@ DELETE {{localhost}}/profiles/PROFILE-UUID-HERE
 GET {{localhost}}/authors
 
 ### FETCH AN AUTHOR BY ID
-GET {{localhost}}/authors/AUTHOR-UUID-HERE
+GET {{localhost}}/authors/D761B3C5-9FAF-F011-A791-4C496CCEA2E2
 
 ### CREATE A NEW AUTHOR FOR A USER
 POST {{localhost}}/authors
@@ -88,15 +88,16 @@ content-type: application/json
 }
 
 ### UPDATE AN AUTHOR
-PUT {{localhost}}/authors/AUTHOR-UUID-HERE
+PUT {{localhost}}/authors/D761B3C5-9FAF-F011-A791-4C496CCEA2E2
 content-type: application/json
 
 {
+    "userId": "B297391E-98AF-F011-A791-4C496CCEA2E2",
     "biography": "Updated biography with new achievements and publications"
 }
 
 ### DELETE AN AUTHOR
-DELETE {{localhost}}/authors/AUTHOR-UUID-HERE
+DELETE {{localhost}}/authors/D6645074-9FAF-F011-A791-4C496CCEA2E2
 
 ##################################################
 ### CATEGORY ENDPOINTS
@@ -151,8 +152,8 @@ content-type: application/json
     "content": "TypeScript is a strongly typed programming language that builds on JavaScript...",
     "excerpt": "Learn the basics of TypeScript in this comprehensive guide",
     "published": true,
-    "authorId": "AUTHOR-UUID-HERE",
-    "categoryIds": ["CATEGORY-UUID-1", "CATEGORY-UUID-2"]
+    "authorId": "D761B3C5-9FAF-F011-A791-4C496CCEA2E2",
+    "categoryIds": ["F35974D2-A1AF-F011-A791-4C496CCEA2E2"]
 }
 
 ### UPDATE A BLOG

@@ -41,11 +41,12 @@ export const updateProfileSchema = z.object({
 // Author validation schemas
 export const createAuthorSchema = z.object({
   userId: z.string().regex(sqlServerUuidRegex, 'Invalid user ID format'),
-  biography: z.string().optional(),
+  biography: z.string(),
 });
 
 export const updateAuthorSchema = z.object({
-  biography: z.string().optional(),
+  userId: z.string().regex(sqlServerUuidRegex, 'Invalid user ID format'),
+  biography: z.string(),
 });
 
 // Blog validation schemas
